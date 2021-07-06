@@ -16,7 +16,7 @@ DSMR_OBIS_NAMES = {
 
 DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}\n$/;
 
-class DsrmMessageParser {
+class DsmrMessageParser {
 
     static parse(msg) {
         const rows = msg.split('\n');
@@ -113,4 +113,4 @@ OBIS_PARSERS = [
     new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff2, DSMR_OBIS_NAMES.receivedTariff2)
 ];
 
-module.exports = { DsrmMessageParser, DSMR_OBIS_NAMES, DSMR_MESSAGE_END_REGEX };
+module.exports = { DsmrMessageParser, DSMR_OBIS_NAMES, DSMR_MESSAGE_END_REGEX };
