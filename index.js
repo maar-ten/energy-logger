@@ -6,7 +6,7 @@ const { readFileSync } = require('fs');
 
 const testData = readFileSync('example-message.txt', 'utf8');
 
-const { DSMR_MESSAGE_END_REGEX, DsrmMessageParser } = require('./dsrm-message-parser');
+const { DSMR_MESSAGE_END_REGEX, DsmrMessageParser } = require('./dsmr-message-parser');
 const PORT_ADDRESS = '/dev/ttyUSB0';
 
 SerialPort.Binding = MockBinding;
@@ -22,4 +22,4 @@ port.on('open', () => port.binding.emitData(testData));
 const serialPortMessages = port.pipe(new Regex({ regex: DSMR_MESSAGE_END_REGEX }));
 
 const messages$ = fromEvent(serialPortMessages, 'data');
-messages$.subscribe(DsrmMessageParser.parse);
+messages$.subscribe(DsmrMessageParser.parse);
