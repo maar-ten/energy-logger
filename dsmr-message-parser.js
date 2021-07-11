@@ -36,50 +36,20 @@ function parseRow(row) {
     }
 }
 
-class Power {
-    static regex = /\(([0-9]*\.[0-9]*)\*kW\)/; // matches '(00.198*kW)'
-
-    static is(str) {
-        return str.startsWith(DSMR_OBIS_CODES.power);
+class ObisParser {
+    constructor(parserConfig) {
+        this.config = parserConfig;
     }
 
-    static parse(str) {
-        const match = this.regex.exec(str);
+    is(str) {
+        return str.startsWith(this.config.key);
+    }
+
+    parse(str) {
+        const match = this.config.matcher.exec(str);
         if (match) {
-            const value = parseFloat(match[1]) * 1000;
-            return { key: DSMR_OBIS_NAMES.power, value };
-        }
-    }
-}
-
-class Timestamp {
-    static regex = /\(([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})S\)/; // matches '(210705164046S)'
-
-    static is(str) {
-        return str.startsWith(DSMR_OBIS_CODES.timestamp);
-    }
-
-    static parse(str) {
-        const match = this.regex.exec(str);
-        if (match) {
-            const value = `20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`;
-            return { key: DSMR_OBIS_NAMES.timestamp, value };
-        }
-    }
-}
-
-class TariffIndicator {
-    static regex = /\(([0-9]*)\)/; // matches '(0002)'
-
-    static is(str) {
-        return str.startsWith(DSMR_OBIS_CODES.tariffIndicator);
-    }
-
-    static parse(str) {
-        const match = this.regex.exec(str);
-        if (match) {
-            const value = parseInt(match[1], 10);
-            return { key: DSMR_OBIS_NAMES.tariffIndicator, value };
+            const value = this.config.parseValue(match);
+            return { key: this.config.name, value };
         }
     }
 }
@@ -105,10 +75,31 @@ class ReceivedTariff {
     }
 }
 
+const power = new ObisParser({
+    key: DSMR_OBIS_CODES.power,
+    name: DSMR_OBIS_NAMES.power,
+    matcher: /\(([0-9]*\.[0-9]*)\*kW\)/, // matches '(00.198*kW)'
+    parseValue: match => parseFloat(match[1]) * 1000
+});
+
+const timestamp = new ObisParser({
+    key: DSMR_OBIS_CODES.timestamp,
+    name: DSMR_OBIS_NAMES.timestamp,
+    matcher: /\(([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})S\)/, // matches '(210705164046S)'
+    parseValue: match => `20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`
+});
+
+const tariffIndicator = new ObisParser({
+    key: DSMR_OBIS_CODES.tariffIndicator,
+    name: DSMR_OBIS_NAMES.tariffIndicator,
+    matcher: /\(([0-9]*)\)/, // matches '(0002)'
+    parseValue: match => parseInt(match[1], 10)
+});
+
 OBIS_PARSERS = [
-    Power,
-    Timestamp,
-    TariffIndicator,
+    power,
+    timestamp,
+    tariffIndicator,
     new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff1, DSMR_OBIS_NAMES.receivedTariff1),
     new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff2, DSMR_OBIS_NAMES.receivedTariff2)
 ];
