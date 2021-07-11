@@ -1,12 +1,7 @@
 tasks:
-  - name: Run InfluxDB docker image (for development purpose only)
-    command: |
-      docker run --name influxdb -p 8086:8086 -d influxdb:2.0.7 --reporting-disabled
-      gp sync-done dockerRun
-  
-  - name: Configure InfluxDB bucket when a Gitpod workspace is created
+  - name: Run and configure InfluxDB docker image (for development purpose only)
     init: |
-      gp sync-await dockerRun
+      docker run --name influxdb -p 8086:8086 -d influxdb:2.0.7 --reporting-disabled
       docker exec influxdb influx setup -f -u dsmr -p dsmrdsmr -o dsmr -b dsmr -r 0 -t dsmrdsmr
   
   - name: Install npm dependencies
