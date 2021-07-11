@@ -19,14 +19,18 @@ DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}\n$/;
 class DsmrMessageParser {
 
     static parse(msg) {
-        const rows = msg.split('\n');
-        const results = rows
+        return msg.split('\n')
+            // filter out empty rows
             .filter(row => row.length > 0)
+            // parse name and value from row
             .map(parseRow)
+            // filter out rows that cannot parsed
             .filter(row => row)
-            . reduce((acc, curr) => acc[curr.key] = curr.value, {});
-        //todo reduce values to a map (key:value)
-        console.log({ results });
+            // collect values in data object
+            .reduce((acc, curr) => {
+                acc[curr.key] = curr.value;
+                return acc;
+            }, {});
     }
 
 }
@@ -98,12 +102,16 @@ const tariffIndicator = new ObisParser({
     parseValue: match => parseInt(match[1], 10)
 });
 
+const receivedTariff1 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff1, DSMR_OBIS_NAMES.receivedTariff1);
+
+const receivedTariff2 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff2, DSMR_OBIS_NAMES.receivedTariff2);
+
 OBIS_PARSERS = [
     power,
     timestamp,
     tariffIndicator,
-    new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff1, DSMR_OBIS_NAMES.receivedTariff1),
-    new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff2, DSMR_OBIS_NAMES.receivedTariff2)
+    receivedTariff1,
+    receivedTariff2
 ];
 
 module.exports = { DsmrMessageParser, DSMR_OBIS_NAMES, DSMR_MESSAGE_END_REGEX };
