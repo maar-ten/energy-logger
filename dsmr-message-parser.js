@@ -99,7 +99,7 @@ const tariffIndicator = new ObisParser({
     key: DSMR_OBIS_CODES.tariffIndicator,
     name: DSMR_OBIS_NAMES.tariffIndicator,
     matcher: /\(([0-9]*)\)/, // matches '(0002)'
-    parseValue: match => parseInt(match[1], 10)
+    parseValue: match => `${parseInt(match[1], 10)}`
 });
 
 const receivedTariff1 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff1, DSMR_OBIS_NAMES.receivedTariff1);
