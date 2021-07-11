@@ -8,4 +8,4 @@ tasks:
       influx setup -f -u dsmr -p dsmrdsmr -o dsmr -b dsmr -r 0 -t dsmrdsmr
 
   - name: Install npm dependencies
-    command: npm install
+    init: npm install
