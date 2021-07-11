@@ -20,11 +20,13 @@ class DsmrMessageParser {
 
     static parse(msg) {
         const rows = msg.split('\n');
-        const results = rows.filter(row => row.length > 0)
+        const results = rows
+            .filter(row => row.length > 0)
             .map(parseRow)
-            .filter(row => row);
+            .filter(row => row)
+            . reduce((acc, curr) => acc[curr.key] = curr.value, {});
         //todo reduce values to a map (key:value)
-        console.log({ results: results });
+        console.log({ results });
     }
 
 }
