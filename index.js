@@ -3,15 +3,12 @@ const MockBinding = require('@serialport/binding-mock');
 const Regex = require('@serialport/parser-regex');
 const { fromEvent } = require('rxjs');
 const { readFileSync } = require('fs');
-const {InfluxDB, Point} = require('@influxdata/influxdb-client');
+const { InfluxdbWriter } = require('./influxdb-writer');
 
 const testData = readFileSync('example-message.txt', 'utf8');
 
-const influxdb = new InfluxDB({url: 'http://localhost:8086', token: 'dsmrdsmr'});
-const influxWrite = influxdb.getWriteApi('dsmr', 'dsmr');
-
-const { DSMR_MESSAGE_END_REGEX, DsmrMessageParser, DSMR_OBIS_NAMES } = require('./dsmr-message-parser');
-const { map, tap } = require('rxjs/operators');
+const { DSMR_MESSAGE_END_REGEX, DsmrMessageParser } = require('./dsmr-message-parser');
+const { map, tap, bufferCount } = require('rxjs/operators');
 const PORT_ADDRESS = '/dev/ttyUSB0';
 
 SerialPort.Binding = MockBinding;
@@ -24,23 +21,17 @@ const port = new SerialPort(PORT_ADDRESS, {
 port.on('open', () => port.binding.emitData(testData));
 const serialPortMessages = port.pipe(new Regex({ regex: DSMR_MESSAGE_END_REGEX }));
 
+const writer = new InfluxdbWriter();
+
 const messages$ = fromEvent(serialPortMessages, 'data').pipe(
+    // parse data from the message
     map(DsmrMessageParser.parse),
-    map(toPoint),
-    tap(write)
+    // map to influxdb point
+    map(writer.toPoint),
+    // buffer for efficiency (900=~15min)
+    bufferCount(1),
+    // write to DB
+    tap(writer.toInflux)
 );
 messages$.subscribe(console.log);
 
-function toPoint(data) {
-    return new Point('dsmr')
-    .timestamp(new Date(data.timestamp))
-    .floatField(DSMR_OBIS_NAMES.receivedTariff1, data.receivedTariff1)
-    .floatField(DSMR_OBIS_NAMES.receivedTariff2, data.receivedTariff2)
-    .stringField(DSMR_OBIS_NAMES.tariffIndicator, data.tariffIndicator)
-    .intField(DSMR_OBIS_NAMES.power, data.power)
-}
-
-function write(point) {
-    influxWrite.writePoint(point);
-    influxWrite.close();
-}
