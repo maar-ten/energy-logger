@@ -1,14 +1,15 @@
 const SerialPort = require('@serialport/stream');
 const MockBinding = require('@serialport/binding-mock');
 const Regex = require('@serialport/parser-regex');
-const { fromEvent } = require('rxjs');
 const { readFileSync } = require('fs');
+const { fromEvent, from } = require('rxjs');
+const { map, tap, bufferCount } = require('rxjs/operators');
+
 const { InfluxdbWriter } = require('./influxdb-writer');
+const { DsmrMessageParser, DSMR_MESSAGE_END_REGEX } = require('./dsmr-message-parser');
 
 const testData = readFileSync('example-message.txt', 'utf8');
 
-const { DSMR_MESSAGE_END_REGEX, DsmrMessageParser } = require('./dsmr-message-parser');
-const { map, tap, bufferCount } = require('rxjs/operators');
 const PORT_ADDRESS = '/dev/ttyUSB0';
 
 SerialPort.Binding = MockBinding;
@@ -18,6 +19,7 @@ const port = new SerialPort(PORT_ADDRESS, {
     baudRate: 115200,
     parity: 'none'
 });
+
 port.on('open', () => port.binding.emitData(testData));
 const serialPortMessages = port.pipe(new Regex({ regex: DSMR_MESSAGE_END_REGEX }));
 
@@ -27,11 +29,11 @@ const messages$ = fromEvent(serialPortMessages, 'data').pipe(
     // parse data from the message
     map(DsmrMessageParser.parse),
     // map to influxdb point
-    map(writer.toPoint),
+    map(msg => writer.toPoint(msg)),
     // buffer for efficiency (900=~15min)
-    bufferCount(1),
+    bufferCount(900),
     // write to DB
-    tap(writer.toInflux)
+    tap(points => writer.toInflux(points))
 );
 messages$.subscribe(console.log);
 

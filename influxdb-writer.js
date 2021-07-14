@@ -8,7 +8,6 @@ class InfluxdbWriter {
     }
 
     toInflux(points) {
-        console.log(points);
         this.influxWrite.writePoints(points);
         this.influxWrite.close();
     }
