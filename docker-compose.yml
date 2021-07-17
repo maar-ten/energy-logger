@@ -1,0 +1,19 @@
+version: "3.8"
+
+networks:
+  dsmr:
+    external: false
+
+services:
+    influxdb:
+        image: influxdb:2.0.7
+        container_name: influxdb
+        ports:
+            - 8086:8086
+        networks: [dsmr]
+
+    dsmrConnector:
+        image: energy-logger:latest
+        container_name: energy-logger
+        networks: [dsmr]
+        command: sh -c "node index.js"
