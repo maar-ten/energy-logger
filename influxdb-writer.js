@@ -9,7 +9,7 @@ class InfluxdbWriter {
 
     toInflux(points) {
         this.influxWrite.writePoints(points);
-        this.influxWrite.close();
+        this.influxWrite.flush();
     }
 
     toPoint(data) {
@@ -19,6 +19,10 @@ class InfluxdbWriter {
             .floatField(DSMR_OBIS_NAMES.receivedTariff2, data.receivedTariff2)
             .stringField(DSMR_OBIS_NAMES.tariffIndicator, data.tariffIndicator)
             .intField(DSMR_OBIS_NAMES.power, data.power);
+    }
+
+    close() {
+        this.influxWrite.close();
     }
 }
 
