@@ -25,7 +25,7 @@ const messages$ = fromEvent(serialPortMessages, 'data').pipe(
     // convert to influxdb point
     map(msg => writer.toPoint(msg)),
     // buffer data for writing efficiency (900=~15min)
-    bufferCount(1)
+    bufferCount(600)
 );
 messages$.subscribe({
   next: points => writer.toInflux(points),

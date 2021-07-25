@@ -9,7 +9,7 @@ class InfluxdbWriter {
 
     toInflux(points) {
         this.influxWrite.writePoints(points);
-        this.influxWrite.flush();
+        this.influxWrite.flush().catch(console.error);
     }
 
     toPoint(data) {
