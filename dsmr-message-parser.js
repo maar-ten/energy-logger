@@ -14,7 +14,7 @@ DSMR_OBIS_NAMES = {
     power: 'power'
 };
 
-DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}\n$/;
+DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}/;
 
 class DsmrMessageParser {
 

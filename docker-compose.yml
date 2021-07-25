@@ -6,14 +6,15 @@ networks:
 
 services:
     influxdb:
-        image: influxdb:2.0.7
+        image: influxdb:1.8.6
         container_name: influxdb
         ports:
             - 8086:8086
         networks: [dsmr]
 
-    dsmrConnector:
-        image: energy-logger:latest
-        container_name: energy-logger
+    grafana:
+        image: grafana/grafana
+        container_name: grafana
+        ports:
+            - 3000:3000
         networks: [dsmr]
-        command: sh -c "node index.js"
