@@ -16,6 +16,7 @@
   "gnetId": null,
   "graphTooltip": 0,
   "id": 1,
+  "iteration": 1627715889588,
   "links": [],
   "panels": [
     {
@@ -560,20 +561,51 @@
       "type": "timeseries"
     }
   ],
-  "refresh": false,
+  "refresh": "1m",
   "schemaVersion": 30,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "description": "De meterstand van het normaaltarief aan het begin van deze periode. Staat soms op je factuur of wordt los vermeldt op de website van je energieleverancier.",
+        "error": null,
+        "hide": 2,
+        "label": "Meterstand normaaltarief ",
+        "name": "startNormaaltarief",
+        "query": "3164",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "De meterstand van het daltarief aan het begin van deze periode. Staat soms op je factuur of wordt los vermeldt op de website van je energieleverancier.",
+        "error": null,
+        "hide": 2,
+        "label": "Meterstand daltarief ",
+        "name": "startDaltarief",
+        "query": "2672",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "description": "Het verbruik in de vorige periode. Staat op de jaarafrekening van je energieleverancier.",
+        "error": null,
+        "hide": 2,
+        "label": "",
+        "name": "verbruikVorigePeriode",
+        "query": "2519",
+        "skipUrlSync": false,
+        "type": "constant"
+      }
+    ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-12h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "",
   "title": "Electriciteitsverbruik",
   "uid": "mITBg_Wgz",
-  "version": 6
+  "version": 11
 }
