@@ -40,12 +40,12 @@ const messages$ = fromEvent(serialPortMessages, 'data').pipe(
   // parse data from the message
   map(DsmrMessageParser.parse),
   // convert to influxdb point
-  map(msg => writer.toPoint(msg)),
+  map(writer.toPoint),
   // buffer data for writing efficiency (600=~10min)
   bufferCount(1)
 );
 messages$.subscribe({
-  next: points => writer.toInflux(points),
+  next: writer.toInflux,
   error: console.error
 });
 
