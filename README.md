@@ -26,7 +26,3 @@ For more information about configuring the data source see [InfluxDB docs](https
 Start collecting data with a background process
 
 ```nohup node index.js &``` 
-
-## Gitpod usage
-When importing this project on [Gitpod](https://gitpod.io/#https://github.com/maar-ten/energy-logger) a docker image with InfluxDB will be dowloaded and started, which might come in handy when testing the program. After the image is started for the first time you need to create the database that will store the data. 
-See [getting started](#Getting-started) for more information.
