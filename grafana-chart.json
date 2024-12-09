@@ -179,7 +179,7 @@
         "x": 5,
         "y": 0
       },
-      "hideTimeOverride": true,
+      "hideTimeOverride": false,
       "id": 2,
       "options": {
         "barRadius": 0,
@@ -280,7 +280,7 @@
         }
       ],
       "timeFrom": "now-7d",
-      "title": "Verbruik laatste 7 dagen",
+      "title": "Verbruik per dag",
       "type": "barchart"
     },
     {
@@ -288,7 +288,7 @@
         "type": "influxdb",
         "uid": "ddvs4zo3ugmioa"
       },
-      "description": "Huidige meterstand vergeleken met de meterstand aan het eind van de vorige factuurperiode ($verbruikVorigePeriode kW).",
+      "description": "Huidige verbruik vergeleken met verbruik aan het eind van de vorige factuurperiode ($vorigVerbruikTotaal kW).",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -360,7 +360,7 @@
           "measurement": "dsmr",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT last(\"receivedTariff1\") - 5392 + last(\"receivedTariff2\") - $verbruikVorigePeriode FROM \"dsmr\" WHERE $timeFilter",
+          "query": "SELECT last(\"receivedTariff1\") - $vorigVerbruikLaag + last(\"receivedTariff2\") - $vorigVerbruikHoog FROM \"dsmr\" WHERE $timeFilter",
           "rawQuery": true,
           "refId": "A",
           "resultFormat": "time_series",
@@ -576,7 +576,7 @@
         "x": 0,
         "y": 11
       },
-      "hideTimeOverride": true,
+      "hideTimeOverride": false,
       "id": 11,
       "options": {
         "barRadius": 0,
@@ -677,7 +677,7 @@
         }
       ],
       "timeFrom": "now-10w",
-      "title": "Verbruik laatste 10 weken",
+      "title": "Verbruik per week",
       "type": "barchart"
     },
     {
@@ -685,7 +685,7 @@
         "type": "influxdb",
         "uid": "ddvs4zo3ugmioa"
       },
-      "description": "Gemiddeld verbruik (Watt) per minuut uitgezet in de tijd",
+      "description": "Gemiddeld verbruik (kW) per minuut uitgezet in de tijd",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -818,21 +818,35 @@
         "description": "Het totaalverbruik (hoog en laag) in de vorige periode. Staat op de jaarafrekening van je energieleverancier.",
         "hide": 2,
         "label": "",
-        "name": "verbruikVorigePeriode",
+        "name": "vorigVerbruikHoog",
         "query": "6643",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "name": "vorigVerbruikLaag",
+        "query": "5392",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "hide": 2,
+        "name": "vorigVerbruikTotaal",
+        "query": "2027",
         "skipUrlSync": false,
         "type": "constant"
       }
     ]
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-7d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Electriciteitsverbruik",
   "uid": "mITBg_Wgz",
-  "version": 16,
+  "version": 17,
   "weekStart": "monday"
 }
