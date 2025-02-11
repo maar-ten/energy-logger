@@ -1,8 +1,9 @@
 {
-  "name": "energy",
+  "name": "dsmr-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "DSMR client script for pushing DSMR data to an InfluxDB database",
   "main": "index.js",
+  "engines": {"node": "18"},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

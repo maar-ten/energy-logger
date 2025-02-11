@@ -3,7 +3,7 @@ const { DSMR_OBIS_NAMES } = require('./dsmr-message-parser');
 
 class InfluxdbWriter {
     constructor() {
-        const influxdb = new InfluxDB({ url: 'http://localhost:8086', token: 'dsmrdsmr' });
+        const influxdb = new InfluxDB({ url: 'http://dsmr:8086', token: 'dsmrdsmr' });
         this.influxWrite = influxdb.getWriteApi('dsmr', 'dsmr');
     }
 

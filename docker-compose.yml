@@ -20,3 +20,9 @@ services:
           - 3000:3000
         networks:
           - dsmr
+
+    dsmr-client:
+        image: dsmr-client
+        container_name: dsmr-client
+        networks:
+          - dsmr

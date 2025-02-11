@@ -4,8 +4,10 @@ This NodeJS program connects to an DSMR 5.0 compliant energy meter via the seria
 The data that has been collected can be viewed in a Grafana dashboard.
 
 ## Getting started
-To get going with this project you will need InfluxDB for data storage and Grafana for dashboarding.
-The easiest way to get both up and running fast is to install docker on the Raspberry Pi and run the docker compose command
+To get going with the project you will need NodeJS for running the DSMR client script, InfluxDB for data storage and Grafana for dashboarding.
+The easiest way to get all that up and running fast is to install docker on the Raspberry Pi and run the docker commands
+
+```docker build --no-cache=true -t dsmr-client .```
 
 ```docker-compose up -d```
 
