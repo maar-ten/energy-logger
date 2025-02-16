@@ -4,7 +4,7 @@ networks:
 
 services:
     influxdb:
-        image: influxdb:1.8.6
+        image: influxdb-dsmr
         container_name: influxdb
         ports:
           - 8086:8086
