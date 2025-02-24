@@ -7,15 +7,13 @@ The data that has been collected can be viewed in a Grafana dashboard.
 To get going with the project you will need NodeJS for running the DSMR client script, InfluxDB for data storage and Grafana for dashboarding.
 The easiest way to get all that up and running fast is to install docker on the Raspberry Pi and run the docker commands
 
+```curl -sSL https://get.docker.com | sh```
+
 ```docker build --no-cache=true -f Dockerfile-influxdb-dsmr -t influxdb-dsmr .```
 
 ```docker build --no-cache=true -f Dockerfile-dsmr-client -t dsmr-client .```
 
 ```docker-compose up -d```
-
-After that you will need to create a new InfluxDB database
-
-```docker exec influxdb influx -execute 'create database dsmr'```
 
 Now you can login to Grafana with a web browser and create a data source for InfluxDB
 

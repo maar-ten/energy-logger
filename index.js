@@ -1,5 +1,5 @@
-const { from, fromEvent, interval } = require('rxjs');
-const { map, tap, catchError, skip, bufferCount, retry, filter, take, switchMap, takeWhile, mergeMap } = require('rxjs/operators');
+const { fromEvent, interval } = require('rxjs');
+const { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } = require('rxjs/operators');
 
 const { InfluxdbWriter } = require('./influxdb-writer');
 const { DsmrMessageParser } = require('./dsmr-message-parser');
@@ -19,7 +19,7 @@ const influxReadyState$ = interval(2000).pipe(
   tap(() => console.log('InfluxDB is ready')),
 
   // retry the ready check (an error is thrown when InfluxDB is not ready)
-  retry({count: 10}),
+  retry({ count: 10 }),
 );
 
 const messages$ = influxReadyState$.pipe(
@@ -36,7 +36,7 @@ const messages$ = influxReadyState$.pipe(
   map(writer.toPoint),
 
   // buffer data for writing efficiency (60=~1min)
-  bufferCount(60)
+  bufferCount(1)
 )
 
 messages$.subscribe({
