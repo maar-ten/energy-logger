@@ -24,5 +24,8 @@ services:
     dsmr-client:
         image: dsmr-client
         container_name: dsmr-client
+        environment:
+          - INFLUXDB_HOST=http://influxdb
+          - INFLUXDB_PORT=8086
         networks:
           - dsmr
