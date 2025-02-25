@@ -29,3 +29,5 @@ services:
           - INFLUXDB_PORT=8086
         networks:
           - dsmr
+        devices:
+          - "/dev/ttyUSB0:/dev/ttyUSB0"  # Mapping host's serial port to the container
