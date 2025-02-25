@@ -8,4 +8,4 @@ influx -execute 'CREATE DATABASE dsmr_hourly'
 influx -execute 'CREATE RETENTION POLICY one_week ON dsmr DURATION 7d REPLICATION 1 DEFAULT' 
 
 # create continuous query for downsampling dsmr by the hour
-influx -execute 'CREATE CONTINUOUS QUERY samply_by_hour ON dsmr BEGIN SELECT min(receivedTariff1) AS receivedTariff1_min, max(receivedTariff1) AS receivedTariff1_max, min(receivedTariff2) AS receivedTariff2_min, max(receivedTariff2) AS receivedTariff2_max, mean(power) INTO dsmr_hourly.autogen.dsmr_hourly FROM dsmr.autogen.dsmr GROUP BY time(1h) END' 
+influx -execute 'CREATE CONTINUOUS QUERY sample_by_hour ON dsmr BEGIN SELECT min(receivedTariff1) AS receivedTariff1_min, max(receivedTariff1) AS receivedTariff1_max, min(receivedTariff2) AS receivedTariff2_min, max(receivedTariff2) AS receivedTariff2_max, mean(power) INTO dsmr_hourly.autogen.dsmr_hourly FROM dsmr.one_week.dsmr GROUP BY time(1h) END' 
