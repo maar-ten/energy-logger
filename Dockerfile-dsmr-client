@@ -1,5 +1,4 @@
 FROM node:22-alpine AS build-env
-ENV TZ="Europe/Amsterdam"
 COPY . /app
 WORKDIR /app
 
