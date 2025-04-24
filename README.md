@@ -13,7 +13,7 @@ The easiest way to get all that up and running fast is to install docker on the 
 
 ```docker build --no-cache=true -f Dockerfile-dsmr-client -t dsmr-client .```
 
-```docker-compose up -d```
+```docker compose up -d```
 
 Now you can login to Grafana with a web browser and create a data source for InfluxDB
 
