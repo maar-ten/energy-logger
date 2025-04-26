@@ -7,6 +7,7 @@ node_modules/
 # ignore docker files
 Dockerfile
 docker-compose.yml
+.env
 
 # influx data files
 influx-data/
