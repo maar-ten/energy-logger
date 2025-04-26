@@ -23,7 +23,7 @@ class InfluxdbWriter {
 
     toPoint(data) {
         return new Point('dsmr')
-            .timestamp(new Date(Date.parse(data.timestamp)))
+            .timestamp(toUtc(data.timestamp))
             .floatField(DSMR_OBIS_NAMES.receivedTariff1, data.receivedTariff1)
             .floatField(DSMR_OBIS_NAMES.receivedTariff2, data.receivedTariff2)
             .stringField(DSMR_OBIS_NAMES.tariffIndicator, data.tariffIndicator)
@@ -37,6 +37,13 @@ class InfluxdbWriter {
     close() {
         this.influxWrite.close();
     }
+}
+
+function toUtc(timestamp) {
+  const date = new Date(timestamp);
+  const offset = date.getTimezoneOffset();
+  const utcTimestamp = date.getTime() + offset * 60 * 1000;
+  return new Date(utcTimestamp);
 }
 
 module.exports = { InfluxdbWriter };
