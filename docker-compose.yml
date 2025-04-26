@@ -12,8 +12,6 @@ services:
           - dsmr
         volumes:
           - ./influx-data:/var/lib/influxdb
-        environment:
-          - TZ=${TZ}
 
     grafana:
         image: grafana/grafana
