@@ -27,6 +27,7 @@ services:
         environment:
           - INFLUXDB_HOST=http://influxdb
           - INFLUXDB_PORT=8086
+          - TZ=${TZ}
         networks:
           - dsmr
         devices:
