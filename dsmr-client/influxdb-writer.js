@@ -23,7 +23,7 @@ class InfluxdbWriter {
 
     toPoint(data) {
         return new Point('dsmr')
-            .timestamp(new Date(data.timestamp))
+            .timestamp(new Date(data.timestamp).toUTCString())
             .floatField(DSMR_OBIS_NAMES.receivedTariff1, data.receivedTariff1)
             .floatField(DSMR_OBIS_NAMES.receivedTariff2, data.receivedTariff2)
             .stringField(DSMR_OBIS_NAMES.tariffIndicator, data.tariffIndicator)
