@@ -3,7 +3,7 @@ const { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } = requir
 
 const { InfluxdbWriter } = require('./influxdb-writer');
 const { DsmrMessageParser } = require('./dsmr-message-parser');
-const { DsmrClient } = require('./dsmr-client');
+const { DsmrClient } = require('.');
 
 const writer = new InfluxdbWriter();
 

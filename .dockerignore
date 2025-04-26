@@ -1,5 +1,5 @@
 # ignore node_modules
-/node_modules
+node_modules/
 
 # ignore dot-files
 .*
@@ -9,4 +9,4 @@ Dockerfile
 docker-compose.yml
 
 # influx data files
-/influx-data
+influx-data/
