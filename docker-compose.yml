@@ -4,7 +4,7 @@ networks:
 
 services:
     influxdb:
-        image: influxdb:1.8.6
+        image: influxdb-dsmr
         container_name: influxdb
         ports:
           - 8086:8086
@@ -12,6 +12,8 @@ services:
           - dsmr
         volumes:
           - ./influx-data:/var/lib/influxdb
+        environment:
+          - TZ=${TZ}
 
     grafana:
         image: grafana/grafana
@@ -20,3 +22,14 @@ services:
           - 3000:3000
         networks:
           - dsmr
+
+    dsmr-client:
+        image: dsmr-client
+        container_name: dsmr-client
+        environment:
+          - INFLUXDB_HOST=http://influxdb
+          - INFLUXDB_PORT=8086
+        networks:
+          - dsmr
+        devices:
+          - "/dev/ttyUSB0:/dev/ttyUSB0"  # Mapping host's serial port to the container

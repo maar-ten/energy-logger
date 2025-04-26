@@ -1,0 +1,4 @@
+FROM influxdb:1.8.6
+
+# copy the initialization script to /docker-entrypoint-initdb.d/
+COPY setup_influxdb.sh /docker-entrypoint-initdb.d/setup_influxdb.sh

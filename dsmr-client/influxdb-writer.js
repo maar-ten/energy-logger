@@ -1,24 +1,37 @@
 const { InfluxDB, Point } = require('@influxdata/influxdb-client');
+const { PingAPI } = require('@influxdata/influxdb-client-apis');
+
 const { DSMR_OBIS_NAMES } = require('./dsmr-message-parser');
+
+const influxdbHost = process.env.INFLUXDB_HOST || 'http://localhost';
+const influxdbPort = process.env.INFLUXDB_PORT || 8086;
+const influxdbUrl = `${influxdbHost}:${influxdbPort}`;
 
 class InfluxdbWriter {
     constructor() {
-        const influxdb = new InfluxDB({ url: 'http://localhost:8086', token: 'dsmrdsmr' });
+        console.log(`Setup connection to InfluxDB on ${influxdbUrl}`);
+        const influxdb = new InfluxDB({ url: influxdbUrl, token: 'dsmrdsmr' });
         this.influxWrite = influxdb.getWriteApi('dsmr', 'dsmr');
+        this.pingApi = new PingAPI(influxdb);
     }
 
-    toInflux(points) {
+    async toInflux(points) {
         this.influxWrite.writePoints(points);
-        this.influxWrite.flush().catch(console.error);
+        await this.influxWrite.flush()
+          .catch(err => console.error(err));
     }
 
     toPoint(data) {
         return new Point('dsmr')
-            .timestamp(new Date(data.timestamp))
+            .timestamp(new Date(data.timestamp).toUTCString())
             .floatField(DSMR_OBIS_NAMES.receivedTariff1, data.receivedTariff1)
             .floatField(DSMR_OBIS_NAMES.receivedTariff2, data.receivedTariff2)
             .stringField(DSMR_OBIS_NAMES.tariffIndicator, data.tariffIndicator)
             .intField(DSMR_OBIS_NAMES.power, data.power);
+    }
+
+    isReady() {
+        return this.pingApi.getPing();
     }
 
     close() {

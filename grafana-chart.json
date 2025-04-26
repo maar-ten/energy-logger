@@ -24,7 +24,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ddvs4zo3ugmioa"
+        "uid": "dej3onrzq34lca"
       },
       "fieldConfig": {
         "defaults": {
@@ -37,8 +37,7 @@
             "mode": "percentage",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               }
             ]
           },
@@ -69,7 +68,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.1.4",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -114,7 +113,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "edz3ik78p7ev4f"
+        "uid": "cej3ort20sxdsb"
       },
       "fieldConfig": {
         "defaults": {
@@ -147,8 +146,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -196,18 +194,20 @@
         "showValue": "never",
         "stacking": "normal",
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         },
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "normaaltarief",
           "datasource": {
             "type": "influxdb",
-            "uid": "edz3ik78p7ev4f"
+            "uid": "cej3ort20sxdsb"
           },
           "groupBy": [
             {
@@ -245,7 +245,7 @@
           "alias": "daltarief",
           "datasource": {
             "type": "influxdb",
-            "uid": "edz3ik78p7ev4f"
+            "uid": "cej3ort20sxdsb"
           },
           "groupBy": [
             {
@@ -286,7 +286,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ddvs4zo3ugmioa"
+        "uid": "dej3onrzq34lca"
       },
       "description": "Huidige verbruik vergeleken met verbruik aan het eind van de vorige factuurperiode ($vorigVerbruikTotaal kW).",
       "fieldConfig": {
@@ -302,8 +302,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "#EAB839",
@@ -311,7 +310,7 @@
               }
             ]
           },
-          "unit": "kwatt"
+          "unit": "kW"
         },
         "overrides": []
       },
@@ -336,7 +335,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.1.4",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "datasource": {
@@ -399,7 +398,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ddvs4zo3ugmioa"
+        "uid": "dej3onrzq34lca"
       },
       "description": "Actuele meterstanden voor dal- en normaaltarief",
       "fieldConfig": {
@@ -413,8 +412,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "super-light-green",
-                "value": null
+                "color": "super-light-green"
               }
             ]
           },
@@ -445,7 +443,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.1.4",
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "daltarief",
@@ -511,7 +509,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "edz3ik78p7ev4f"
+        "uid": "cej3ort20sxdsb"
       },
       "fieldConfig": {
         "defaults": {
@@ -544,8 +542,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "green",
-                "value": null
+                "color": "green"
               },
               {
                 "color": "red",
@@ -593,18 +590,20 @@
         "showValue": "never",
         "stacking": "normal",
         "tooltip": {
+          "hideZeros": false,
           "mode": "multi",
           "sort": "none"
         },
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "normaaltarief",
           "datasource": {
             "type": "influxdb",
-            "uid": "edz3ik78p7ev4f"
+            "uid": "cej3ort20sxdsb"
           },
           "groupBy": [
             {
@@ -642,7 +641,7 @@
           "alias": "daltarief",
           "datasource": {
             "type": "influxdb",
-            "uid": "edz3ik78p7ev4f"
+            "uid": "cej3ort20sxdsb"
           },
           "groupBy": [
             {
@@ -683,7 +682,7 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "ddvs4zo3ugmioa"
+        "uid": "dej3onrzq34lca"
       },
       "description": "Gemiddeld verbruik (kW) per minuut uitgezet in de tijd",
       "fieldConfig": {
@@ -699,6 +698,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 100,
             "gradientMode": "opacity",
@@ -730,8 +730,7 @@
             "mode": "absolute",
             "steps": [
               {
-                "color": "light-green",
-                "value": null
+                "color": "light-green"
               },
               {
                 "color": "red",
@@ -758,10 +757,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.6.0",
       "targets": [
         {
           "alias": "verbruik",
@@ -809,44 +810,56 @@
       "type": "timeseries"
     }
   ],
+  "preload": false,
   "refresh": "1m",
-  "schemaVersion": 39,
+  "schemaVersion": 41,
   "tags": [],
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "6643",
+          "value": "6643"
+        },
         "description": "Het totaalverbruik (hoog en laag) in de vorige periode. Staat op de jaarafrekening van je energieleverancier.",
         "hide": 2,
-        "label": "",
         "name": "vorigVerbruikHoog",
         "query": "6643",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "type": "constant"
       },
       {
+        "current": {
+          "text": "5392",
+          "value": "5392"
+        },
         "hide": 2,
         "name": "vorigVerbruikLaag",
         "query": "5392",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "type": "constant"
       },
       {
+        "current": {
+          "text": "2027",
+          "value": "2027"
+        },
         "hide": 2,
         "name": "vorigVerbruikTotaal",
         "query": "2027",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "type": "constant"
       }
     ]
   },
   "time": {
-    "from": "now-7d",
+    "from": "now-30d",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Electriciteitsverbruik",
   "uid": "mITBg_Wgz",
-  "version": 17,
+  "version": 3,
   "weekStart": "monday"
 }

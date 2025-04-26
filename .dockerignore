@@ -1,5 +1,5 @@
 # ignore node_modules
-*/node_modules/*
+node_modules/
 
 # ignore dot-files
 .*
@@ -7,3 +7,7 @@
 # ignore docker files
 Dockerfile
 docker-compose.yml
+.env
+
+# influx data files
+influx-data/
