@@ -27,8 +27,8 @@ services:
         environment:
           - INFLUXDB_HOST=http://influxdb
           - INFLUXDB_PORT=8086
-          - TZ=${TZ}
+          - TZ=${TZ} # Sets the timezone of the image (see the README.md)
         networks:
           - dsmr
         devices:
-          - "/dev/ttyUSB0:/dev/ttyUSB0"  # Mapping host's serial port to the container
+          - "/dev/ttyUSB0:/dev/ttyUSB0"  # Map the host's serial port to the container
