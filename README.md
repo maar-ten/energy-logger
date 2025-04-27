@@ -18,33 +18,13 @@ If no timezone is set UTC will likely be used as default, which might cause time
 ### 2. Install docker
 `curl -sSL https://get.docker.com | sh`
 
-### 3. Build the images
-`docker build --no-cache=true -f Dockerfile-influxdb-dsmr -t influxdb-dsmr .`
-
-`docker build --no-cache=true -f Dockerfile-dsmr-client -t dsmr-client .`
-
 ### 4. Start collecting data
 `docker compose up -d`
 
-## Configure Grafana
+### 5. View the dashboard
 Go to Grafana on [`http://localhost:3000`](`http://localhost:3000`).
 
 The default user and password is `admin`.
-
-### Create DSMR data source
-Create a new InfluxDB data source and enter the values:
-```
-name : dsmr
-url : http://influxdb:8086
-database : dsmr
-```
-
-The collected DSMR data is put in 2 databases:
-- `dsmr` contains data by the second and it has a retention time of a week (168h)
-- `dsmr_hourly` contains summerized data by the hour and data is kept there indefinitly.
-
-### Create the dashboard
-NOTE: If you want to use the [`grafana-chart.json`](./grafana-chart.json) from this project, you will need to import it and then click refresh inside every chart to fix the data source not found warnings. This is due to the 
 
 ## Troubleshooting
 To check if everything works as expected you can take a look at the logs using `docker logs <imagename>`.

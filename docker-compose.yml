@@ -4,8 +4,10 @@ networks:
 
 services:
     influxdb:
-        image: influxdb-dsmr
         container_name: influxdb
+        build:
+          context: .
+          dockerfile: Dockerfile-influxdb-dsmr
         ports:
           - 8086:8086
         networks:
@@ -26,8 +28,10 @@ services:
 
 
     dsmr-client:
-        image: dsmr-client
         container_name: dsmr-client
+        build:
+          context: .
+          dockerfile: Dockerfile-dsmr-client
         environment:
           - INFLUXDB_HOST=http://influxdb
           - INFLUXDB_PORT=8086
