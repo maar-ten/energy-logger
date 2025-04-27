@@ -11,3 +11,6 @@ docker-compose.yml
 
 # influx data files
 influx-data/
+
+# ignore test files
+*.test.js
