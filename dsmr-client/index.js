@@ -5,6 +5,14 @@ const { InfluxdbWriter } = require('./influxdb-writer');
 const { DsmrMessageParser } = require('./dsmr-message-parser');
 const { DsmrClient } = require('./dsmr-client');
 
+
+const reportTimezone = (tz) => console.log(`Timezone is set to ${tz}`);
+if (process.env.TZ) {
+  reportTimezone(process.env.TZ);
+} else {
+  reportTimezone(Intl.DateTimeFormat().resolvedOptions().timeZone);
+}
+
 const writer = new InfluxdbWriter();
 
 // Emits a value once when InfluxDB is ready to receive data
