@@ -92,7 +92,7 @@ const timestamp = new ObisParser({
     key: DSMR_OBIS_CODES.timestamp,
     name: DSMR_OBIS_NAMES.timestamp,
     matcher: /\(([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})[SW]{1}\)/, // matches '(210705164046S and ...W when winter time is active)'
-    parseValue: match => `20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`
+    parseValue: match => new Date(`20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`)
 });
 
 const tariffIndicator = new ObisParser({
