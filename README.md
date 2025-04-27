@@ -54,6 +54,7 @@ You can also see the data in InfluxDB using `docker exec -it influxdb sh` and th
 ```
 > influx
 > use dsmr
+> precision rfc3339 // to see human readable times
 > select * from dsmr limit 10
 ```
 

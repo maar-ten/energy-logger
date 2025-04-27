@@ -64,6 +64,8 @@ class Timestamp {
     constructor() {
         this.offsetStr = this.createTimezoneOffsetStr();
         this.parser = this.createTimestampParser();
+
+        console.log(`The timezone offset is: ${this.offsetStr}`);
     }
 
     /**
