@@ -24,7 +24,8 @@ If no timezone is set UTC will likely be used as default, which might cause time
 ### 5. View the dashboard
 Go to Grafana on [`http://localhost:3000`](`http://localhost:3000`).
 
-The default user and password is `admin`.
+To make changes to the dashboard you will have to login.
+The username and password is `dsmr`.
 
 ## Troubleshooting
 To check if everything works as expected you can take a look at the logs using `docker logs <imagename>`.

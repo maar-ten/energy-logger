@@ -27,7 +27,7 @@ services:
         networks:
           - dsmr
         devices:
-          - "/dev/ttyUSB0:/dev/ttyUSB0"  # Map the host's serial port to the container
+          - /dev/ttyUSB0:/dev/ttyUSB0  # Map the host's serial port to the container
 
     grafana:
         image: grafana/grafana
@@ -40,5 +40,11 @@ services:
           - ./grafana-provisioning:/etc/grafana/provisioning
           - ./dashboards:/var/lib/grafana/dashboards
         environment:
-          - GF_DEFAULT_THEME=light
-          - GF_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/electriciteitsverbruik.json
+          - GF_AUTH_ANONYMOUS_ENABLED=true
+          - GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
+          - GF_AUTH_ANONYMOUS_HIDE_VERSION=true
+          - GF_SECURITY_DISABLE_INITIAL_ADMIN_CREATION=true
+          - GF_SECURITY_ADMIN_USER=dsmr
+          - GF_SECURITY_ADMIN_PASSWORD=dsmr
+          - GF_USERS_DEFAULT_THEME=system
+          - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/var/lib/grafana/dashboards/electriciteitsverbruik.json
