@@ -22,10 +22,7 @@
   "links": [],
   "panels": [
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "dej3onrzq34lca"
-      },
+      "datasource": "dsmr",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -71,10 +68,7 @@
       "pluginVersion": "11.6.0",
       "targets": [
         {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "ddvs4zo3ugmioa"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [
@@ -111,10 +105,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "cej3ort20sxdsb"
-      },
+      "datasource": "dsmr",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -205,10 +196,7 @@
       "targets": [
         {
           "alias": "normaaltarief",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "cej3ort20sxdsb"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [
@@ -243,10 +231,7 @@
         },
         {
           "alias": "daltarief",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "cej3ort20sxdsb"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [
@@ -284,10 +269,7 @@
       "type": "barchart"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "dej3onrzq34lca"
-      },
+      "datasource": "dsmr",
       "description": "Huidige verbruik vergeleken met verbruik aan het eind van de vorige factuurperiode ($vorigVerbruikTotaal kW).",
       "fieldConfig": {
         "defaults": {
@@ -338,10 +320,7 @@
       "pluginVersion": "11.6.0",
       "targets": [
         {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "ddvs4zo3ugmioa"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [
@@ -396,10 +375,7 @@
       "type": "gauge"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "dej3onrzq34lca"
-      },
+      "datasource": "dsmr",
       "description": "Actuele meterstanden voor dal- en normaaltarief",
       "fieldConfig": {
         "defaults": {
@@ -447,10 +423,7 @@
       "targets": [
         {
           "alias": "daltarief",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "ddvs4zo3ugmioa"
-          },
+          "datasource": "dsmr",
           "groupBy": [],
           "measurement": "dsmr",
           "orderByTime": "ASC",
@@ -475,10 +448,7 @@
         },
         {
           "alias": "normaaltarief",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "ddvs4zo3ugmioa"
-          },
+          "datasource": "dsmr",
           "groupBy": [],
           "hide": false,
           "measurement": "dsmr",
@@ -507,10 +477,7 @@
       "type": "stat"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "cej3ort20sxdsb"
-      },
+      "datasource": "dsmr",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -601,10 +568,7 @@
       "targets": [
         {
           "alias": "normaaltarief",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "cej3ort20sxdsb"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [
@@ -639,10 +603,7 @@
         },
         {
           "alias": "daltarief",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "cej3ort20sxdsb"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [
@@ -680,10 +641,7 @@
       "type": "barchart"
     },
     {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "dej3onrzq34lca"
-      },
+      "datasource": "dsmr",
       "description": "Gemiddeld verbruik (kW) per minuut uitgezet in de tijd",
       "fieldConfig": {
         "defaults": {
@@ -766,10 +724,7 @@
       "targets": [
         {
           "alias": "verbruik",
-          "datasource": {
-            "type": "influxdb",
-            "uid": "ddvs4zo3ugmioa"
-          },
+          "datasource": "dsmr",
           "groupBy": [
             {
               "params": [

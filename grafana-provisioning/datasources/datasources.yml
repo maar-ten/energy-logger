@@ -1,0 +1,9 @@
+apiVersion: 1
+
+datasources:
+  - name: dsmr
+    type: influxdb
+    url: http://influxdb:8086
+    access: proxy
+    isDefault: true
+    database: dsmr
