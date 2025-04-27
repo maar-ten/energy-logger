@@ -60,6 +60,7 @@ class ObisParser {
     }
 }
 
+<<<<<<< HEAD
 class Timestamp {
     constructor() {
         this.offsetStr = this.createTimezoneOffsetStr();
@@ -91,7 +92,7 @@ class Timestamp {
             key: DSMR_OBIS_CODES.timestamp,
             name: DSMR_OBIS_NAMES.timestamp,
             matcher: /\(([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})[SW]{1}\)/, // matches '(210705164046S and ...W when winter time is active)'
-            parseValue: match => `20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`
+            parseValue: match => new Date(`20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`)
         });
     }
 
@@ -109,6 +110,8 @@ class Timestamp {
     }
 }
 
+=======
+>>>>>>> parent of 1cc1cb4 (add timezone to timestamp)
 class ReceivedTariff {
     regex = /\(([0-9]*\.[0-9]*)\*kWh\)/; // matches '(002810.380*kWh)'
 
@@ -137,7 +140,12 @@ const power = new ObisParser({
     parseValue: match => parseFloat(match[1]) * 1000
 });
 
-const timestamp = new Timestamp();
+const timestamp = new ObisParser({
+    key: DSMR_OBIS_CODES.timestamp,
+    name: DSMR_OBIS_NAMES.timestamp,
+    matcher: /\(([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})[SW]{1}\)/, // matches '(210705164046S and ...W when winter time is active)'
+    parseValue: match => `20${match[1]}-${match[2]}-${match[3]}T${match[4]}:${match[5]}:${match[6]}`
+});
 
 const tariffIndicator = new ObisParser({
     key: DSMR_OBIS_CODES.tariffIndicator,

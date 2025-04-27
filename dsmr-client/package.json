@@ -3,21 +3,13 @@
   "version": "1.0.0",
   "description": "DSMR client script for pushing DSMR data to an InfluxDB database",
   "main": "index.js",
-  "engines": {
-    "node": "22"
-  },
+  "engines": {"node": "22"},
   "author": "Maar-ten",
   "license": "ISC",
-  "scripts": {
-    "test": "jest"
-  },
   "dependencies": {
     "@influxdata/influxdb-client": "1.35.0",
     "@influxdata/influxdb-client-apis": "1.35.0",
     "rxjs": "7.8.2",
     "serialport": "13.0.0"
-  },
-  "devDependencies": {
-    "jest": "29.7.0"
   }
 }
