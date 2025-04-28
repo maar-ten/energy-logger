@@ -7,3 +7,10 @@ datasources:
     access: proxy
     isDefault: true
     database: dsmr
+    
+  - name: dsmr_hourly
+    type: influxdb
+    url: http://influxdb:8086
+    access: proxy
+    isDefault: false
+    database: dsmr_hourly

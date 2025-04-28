@@ -65,7 +65,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": "dsmr",
@@ -192,11 +192,11 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "alias": "normaaltarief",
-          "datasource": "dsmr",
+          "datasource": "dsmr_hourly",
           "groupBy": [
             {
               "params": [
@@ -317,7 +317,7 @@
         "sizing": "auto",
         "text": {}
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "datasource": "dsmr",
@@ -419,7 +419,7 @@
         "textMode": "auto",
         "wideLayout": true
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "alias": "daltarief",
@@ -564,11 +564,11 @@
         "xTickLabelRotation": 0,
         "xTickLabelSpacing": 0
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "alias": "normaaltarief",
-          "datasource": "dsmr",
+          "datasource": "dsmr_hourly",
           "groupBy": [
             {
               "params": [
@@ -603,7 +603,7 @@
         },
         {
           "alias": "daltarief",
-          "datasource": "dsmr",
+          "datasource": "dsmr_hourly",
           "groupBy": [
             {
               "params": [
@@ -720,7 +720,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "11.6.0",
+      "pluginVersion": "11.6.1",
       "targets": [
         {
           "alias": "verbruik",
@@ -808,13 +808,13 @@
     ]
   },
   "time": {
-    "from": "now-30d",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
   "title": "Electriciteitsverbruik",
   "uid": "mITBg_Wgz",
-  "version": 3,
+  "version": 1,
   "weekStart": "monday"
 }
