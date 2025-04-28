@@ -105,7 +105,7 @@
       "type": "gauge"
     },
     {
-      "datasource": "dsmr",
+      "datasource": "dsmr_hourly",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -231,7 +231,7 @@
         },
         {
           "alias": "daltarief",
-          "datasource": "dsmr",
+          "datasource": "dsmr_hourly",
           "groupBy": [
             {
               "params": [
@@ -477,7 +477,7 @@
       "type": "stat"
     },
     {
-      "datasource": "dsmr",
+      "datasource": "dsmr_hourly",
       "fieldConfig": {
         "defaults": {
           "color": {
