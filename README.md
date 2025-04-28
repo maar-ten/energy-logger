@@ -9,7 +9,7 @@ To get going with the project you will need NodeJS for running the DSMR client s
 The easiest way to get all that up and running fast is to use docker on a Raspberry Pi.
 
 ### 1. Set timezone
-First you will have to set the timezone of the energy meter in a `.env` file. Look here to see a [list of timezone abbreviations](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) that you can use. Then run:
+First you will have to set the timezone of the energy meter in a `.env` file. Take a look at the [list of timezone abbreviations](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) that you can use. Then run:
 
 `echo TZ=your-timezone > .env`
 
@@ -25,7 +25,7 @@ If no timezone is set UTC will likely be used as default, which might cause time
 Go to Grafana on [`http://localhost:3000`](`http://localhost:3000`).
 
 To make changes to the dashboard you will have to login.
-The username and password is `dsmr`.
+The username and password is `admin`.
 
 ## Troubleshooting
 To check if everything works as expected you can take a look at the logs using `docker logs <imagename>`.

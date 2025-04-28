@@ -35,7 +35,7 @@ class DsmrClient {
     }
 
     listen() {
-        console.log('Start listening for DSMR messages');
+        console.log('Listening for DSMR messages');
         return this.port.pipe(new RegexParser({ regex: DSMR_MESSAGE_END_REGEX }));
     }
 }
