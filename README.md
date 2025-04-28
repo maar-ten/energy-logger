@@ -50,10 +50,10 @@ Grafana is configured with 2 data sources and a dashboard
 - [dashboards.yml](./grafana-provisioning/dashboards/dashboards.yml) (the config)
 - [electriciteitsverbruikt.json](./dashboards/electriciteitsverbruik.json) (the dashboard json)
 
-#### dsmr-client
-This NodeJS application connects via USB to the smart meter and collects the messages.
+#### Dsmr client
+This is a NodeJS application that I wrote myself. It connects via USB to the smart meter and collects the OBIS messages.
 
-It parses the data from the message and sends it to InfluxDB. Data that is collected are:
+It parses the data from the message and sends it to InfluxDB. Data that it collects are:
 - timestamp
 - power usage (Watt)
 - electricity used low rate (kW)

@@ -1,3 +1,4 @@
+# v1.8.6 is quite old (2021), but it is the last version that supports ARM v7 architecture (Raspberry Pi 2 B)
 FROM influxdb:1.8.6
 
 # copy the initialization script to /docker-entrypoint-initdb.d/
