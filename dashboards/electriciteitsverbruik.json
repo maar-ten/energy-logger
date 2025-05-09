@@ -773,24 +773,24 @@
     "list": [
       {
         "current": {
-          "text": "7297",
-          "value": "7297"
+          "text": "7620",
+          "value": "7620"
         },
         "description": "Het totaalverbruik (hoog en laag) in de vorige periode. Staat op de jaarafrekening van je energieleverancier.",
         "hide": 2,
         "name": "vorigVerbruikHoog",
-        "query": "7297",
+        "query": "7620",
         "skipUrlSync": true,
         "type": "constant"
       },
       {
         "current": {
-          "text": "5870",
-          "value": "5870"
+          "text": "6104",
+          "value": "6104"
         },
         "hide": 2,
         "name": "vorigVerbruikLaag",
-        "query": "5870",
+        "query": "6104",
         "skipUrlSync": true,
         "type": "constant"
       },
