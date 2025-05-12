@@ -4,12 +4,12 @@ This Docker application stack connects to an DSMR 5.0 compliant energy meter via
 The data that has been collected can then be viewed in a Grafana dashboard.
 
 ## Getting started
-To get going with the project you will need NodeJS for running the DSMR client script, InfluxDB for data storage and Grafana for dashboarding.
+To get going with the project you need to install Docker on a computer that is connected to the energy meter.
 
-The easiest way to get all that up and running fast is to use docker on a Raspberry Pi.
+A Raspberry Pi from 2015 with 1GB of memory suffices to run this application.
 
 ### 1. Set timezone
-First you will have to set the timezone of the energy meter in a `.env` file. Take a look at the [list of timezone abbreviations](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) that you can use. Then run:
+First you will need to set the timezone of the energy meter in a `.env` file. Take a look at the [list of timezone abbreviations](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) that you can use. Then run:
 
 `echo TZ=your-timezone > .env`
 
