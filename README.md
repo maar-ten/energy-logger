@@ -13,15 +13,15 @@ First you will need to set the timezone of the energy meter in a `.env` file. Ta
 
 `echo TZ=your-timezone > .env`
 
-If no timezone is set UTC will likely be used as default, which might cause time shifts in the data.
+If no timezone is set, UTC will likely be used as default. This can cause time shifts in the data if this does not match the meter's timezone.
 
 ### 2. Install docker
 `curl -sSL https://get.docker.com | sh`
 
-### 4. Start collecting data
+### 3. Start collecting data
 `docker compose up -d`
 
-### 5. View the dashboard
+### 4. View the dashboard
 Go to Grafana on [`http://localhost:3000`](`http://localhost:3000`).
 
 To make changes to the dashboard you will have to login.
@@ -40,7 +40,7 @@ InfluxDB is configured with 2 databases:
 - `dsmr` contains data at 1 second resolution and has a retention policy of a week (168h)
 - `dsmr_hourly` contains downsampled data at 1 hour resolution and it is kept forever
 
-The configuration file for the database is [setup_influxdb.sh](./setup_influxdb.sh). This file is copied into the container when the image is build.
+The configuration file for the database is [setup_influxdb.sh](./setup_influxdb.sh). This file is copied into the container when the image is built.
 
 The database is stored in `/influx-data` if you don't change the location in the docker-compose.yml file.
 
@@ -48,7 +48,7 @@ The database is stored in `/influx-data` if you don't change the location in the
 Grafana is configured with 2 data sources and a dashboard
 - [datasources.yml](./grafana-provisioning/datasources/datasources.yml)
 - [dashboards.yml](./grafana-provisioning/dashboards/dashboards.yml) (the config)
-- [electriciteitsverbruikt.json](./dashboards/electriciteitsverbruik.json) (the dashboard json)
+- [electriciteitsverbruik.json](./dashboards/electriciteitsverbruik.json) (the dashboard json)
 
 #### Dsmr client
 This is a NodeJS application that I wrote myself. It connects via USB to the smart meter and collects the OBIS messages.
@@ -62,9 +62,9 @@ It parses the data from the message and sends it to InfluxDB. Data that it colle
 The entry point for the application is [dsmr-client/index.js](./dsmr-client/index.js).
 
 ## My setup
-This application can run on a Raspberry Pi 2 Model B from 2015 with a A 900MHz quad-core ARM Cortex-A7 CPU and 1GB RAM and a 12GB memory card without any problems.
+This application can run on a Raspberry Pi 2 Model B from 2015 with a 900MHz quad-core 32-bit ARM Cortex-A7 CPU, 1GB RAM and a 12GB memory card without any problems.
 
-Because the amount of data gathered can become quite large so I store the Influx-data on an 8GB external USB thumb drive.
+Because the amount of data gathered can become quite large, I store the Influx data on an 8GB external USB thumb drive.
 
 If you mount that drive to `/mnt/usb` you can change the volume mount in the docker-compose.yml file from `./influx-data` to `./mnt/usb/influx-data`.
 
@@ -76,7 +76,7 @@ You can also see the data in InfluxDB using `docker exec -it influxdb sh` and th
 ```
 > influx
 > use dsmr
-> precision rfc3339 // to see human readable times
+> precision rfc3339 // to see human-readable times
 > select * from dsmr limit 10
 ```
 

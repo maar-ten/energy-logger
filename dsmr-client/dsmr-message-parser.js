@@ -24,7 +24,7 @@ class DsmrMessageParser {
             .filter(row => row.length > 0)
             // parse name and value from row
             .map(parseRow)
-            // filter out rows that cannot parsed
+            // filter out rows that cannot be parsed
             .filter(row => row)
             // collect values in data object
             .reduce((acc, curr) => {
