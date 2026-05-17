@@ -1,7 +1,7 @@
 import { SerialPort } from 'serialport';
 import { RegexParser } from '@serialport/parser-regex';
 
-import { DSMR_MESSAGE_END_REGEX } from './dsmr-message-parser.js';
+import { DSMR_MESSAGE_END_REGEX } from './dsmr-message-parser.ts';
 
 const PORT_ADDRESS = '/dev/ttyUSB0';
 
@@ -20,15 +20,17 @@ const PORT_ADDRESS = '/dev/ttyUSB0';
 // SerialPortMock.binding.createPort(PORT_ADDRESS);
 
 export class DsmrClient {
+    port: SerialPort;
+
     constructor() {
         console.log(`Setup connection to serial port ${PORT_ADDRESS}`);
         // uncomment the mock and comment the regular port
         // this.port = new SerialPortMock({
-          this.port = new SerialPort({
+        this.port = new SerialPort({
             path: PORT_ADDRESS,
             baudRate: 115200,
             parity: 'none'
-          });
+        });
 
         // Uncomment below for sending mock data
         // this.port.on('open', () => testData$.subscribe(data => this.port.port.emitData(data)));
@@ -39,3 +41,4 @@ export class DsmrClient {
         return this.port.pipe(new RegexParser({ regex: DSMR_MESSAGE_END_REGEX }));
     }
 }
+

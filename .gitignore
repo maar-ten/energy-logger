@@ -3,3 +3,4 @@ nohup.out
 influx-data/
 .env
 dsmr-telegram-parser-1.0.0.tgz
+.idea/

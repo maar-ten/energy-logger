@@ -16,42 +16,58 @@ export const DSMR_OBIS_NAMES = {
 
 export const DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}/;
 
-export class DsmrMessageParser {
+interface ParsedRow {
+    key: string;
+    value: string | number | Date;
+}
 
-    static parse(msg) {
+interface ParsedMessage {
+    [key: string]: string | number | Date;
+}
+
+export class DsmrMessageParser {
+    static parse(msg: string): ParsedMessage {
         return msg.split('\n')
             // filter out empty rows
             .filter(row => row.length > 0)
             // parse name and value from row
             .map(parseRow)
             // filter out rows that cannot be parsed
-            .filter(row => row)
+            .filter((row): row is ParsedRow => row !== undefined)
             // collect values in data object
             .reduce((acc, curr) => {
                 acc[curr.key] = curr.value;
                 return acc;
-            }, {});
+            }, {} as ParsedMessage);
     }
-
 }
 
-function parseRow(row) {
+function parseRow(row: string): ParsedRow | undefined {
     const parser = OBIS_PARSERS.find(parser => parser.is(row));
     if (parser) {
         return parser.parse(row);
     }
 }
 
+interface ParserConfig {
+    key: string;
+    name: string;
+    matcher: RegExp;
+    parseValue: (match: RegExpExecArray) => string | number | Date;
+}
+
 class ObisParser {
-    constructor(parserConfig) {
+    config: ParserConfig;
+
+    constructor(parserConfig: ParserConfig) {
         this.config = parserConfig;
     }
 
-    is(str) {
+    is(str: string): boolean {
         return str.startsWith(this.config.key);
     }
 
-    parse(str) {
+    parse(str: string): ParsedRow | undefined {
         const match = this.config.matcher.exec(str);
         if (match) {
             const value = this.config.parseValue(match);
@@ -62,17 +78,19 @@ class ObisParser {
 
 class ReceivedTariff {
     regex = /\(([0-9]*\.[0-9]*)\*kWh\)/; // matches '(002810.380*kWh)'
+    key: string;
+    property: string;
 
-    constructor(key, property) {
+    constructor(key: string, property: string) {
         this.key = key;
         this.property = property;
     }
 
-    is(str) {
+    is(str: string): boolean {
         return str.startsWith(this.key);
     }
 
-    parse(str) {
+    parse(str: string): ParsedRow | undefined {
         const match = this.regex.exec(str);
         if (match) {
             const value = parseFloat(match[1]);
@@ -106,10 +124,11 @@ const receivedTariff1 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff1, DSMR
 
 const receivedTariff2 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff2, DSMR_OBIS_NAMES.receivedTariff2);
 
-const OBIS_PARSERS = [
+const OBIS_PARSERS: (ObisParser | ReceivedTariff)[] = [
     power,
     timestamp,
     tariffIndicator,
     receivedTariff1,
     receivedTariff2
 ];
+
