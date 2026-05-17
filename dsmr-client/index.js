@@ -1,9 +1,9 @@
-const { fromEvent, interval } = require('rxjs');
-const { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } = require('rxjs/operators');
+import { fromEvent, interval } from 'rxjs';
+import { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } from 'rxjs/operators';
 
-const { InfluxdbWriter } = require('./influxdb-writer');
-const { DsmrMessageParser } = require('./dsmr-message-parser');
-const { DsmrClient } = require('./dsmr-client');
+import { InfluxdbWriter } from './influxdb-writer.js';
+import { DsmrMessageParser } from './dsmr-message-parser.js';
+import { DsmrClient } from './dsmr-client.js';
 
 const resolvedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 console.log(`Timezone is set to ${resolvedTimezone}`);

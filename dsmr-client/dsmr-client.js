@@ -1,17 +1,17 @@
-const { SerialPort } = require('serialport');
-const { RegexParser } = require('@serialport/parser-regex');
+import { SerialPort } from 'serialport';
+import { RegexParser } from '@serialport/parser-regex';
 
-const { DSMR_MESSAGE_END_REGEX } = require('./dsmr-message-parser');
+import { DSMR_MESSAGE_END_REGEX } from './dsmr-message-parser.js';
 
 const PORT_ADDRESS = '/dev/ttyUSB0';
 
 /**
  * Uncomment below here to bind a mock device to the serial port
  */
-// const { SerialPortMock } = require('serialport');
-// const { readFileSync } = require('fs');
-// const { interval } = require('rxjs');
-// const { map, take } = require('rxjs/operators');
+// import { SerialPortMock } from 'serialport';
+// import { readFileSync } from 'fs';
+// import { interval } from 'rxjs';
+// import { map, take } from 'rxjs/operators';
 // const testData = readFileSync('example-dsmr-messages.txt', 'utf8').split('[BREAK]');
 // const testData$ = interval(1000).pipe(
 //   take(testData.length),
@@ -19,7 +19,7 @@ const PORT_ADDRESS = '/dev/ttyUSB0';
 // );
 // SerialPortMock.binding.createPort(PORT_ADDRESS);
 
-class DsmrClient {
+export class DsmrClient {
     constructor() {
         console.log(`Setup connection to serial port ${PORT_ADDRESS}`);
         // uncomment the mock and comment the regular port
@@ -39,5 +39,3 @@ class DsmrClient {
         return this.port.pipe(new RegexParser({ regex: DSMR_MESSAGE_END_REGEX }));
     }
 }
-
-module.exports = { DsmrClient };

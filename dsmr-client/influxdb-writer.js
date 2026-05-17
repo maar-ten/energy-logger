@@ -1,13 +1,13 @@
-const { InfluxDB, Point } = require('@influxdata/influxdb-client');
-const { PingAPI } = require('@influxdata/influxdb-client-apis');
+import { InfluxDB, Point } from '@influxdata/influxdb-client';
+import { PingAPI } from '@influxdata/influxdb-client-apis';
 
-const { DSMR_OBIS_NAMES } = require('./dsmr-message-parser');
+import { DSMR_OBIS_NAMES } from './dsmr-message-parser.js';
 
 const influxdbHost = process.env.INFLUXDB_HOST || 'http://localhost';
 const influxdbPort = process.env.INFLUXDB_PORT || 8086;
 const influxdbUrl = `${influxdbHost}:${influxdbPort}`;
 
-class InfluxdbWriter {
+export class InfluxdbWriter {
     constructor() {
         console.log(`Setup connection to InfluxDB on ${influxdbUrl}`);
         const influxdb = new InfluxDB({ url: influxdbUrl, token: 'dsmrdsmr' });
@@ -38,5 +38,3 @@ class InfluxdbWriter {
         this.influxWrite.close();
     }
 }
-
-module.exports = { InfluxdbWriter };

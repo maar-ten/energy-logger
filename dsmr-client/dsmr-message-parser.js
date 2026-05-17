@@ -1,4 +1,4 @@
-DSMR_OBIS_CODES = {
+const DSMR_OBIS_CODES = {
     timestamp: '0-0:1.0.0',
     receivedTariff1: '1-0:1.8.1',
     receivedTariff2: '1-0:1.8.2',
@@ -6,7 +6,7 @@ DSMR_OBIS_CODES = {
     power: '1-0:1.7.0'
 };
 
-DSMR_OBIS_NAMES = {
+export const DSMR_OBIS_NAMES = {
     timestamp: 'timestamp',
     receivedTariff1: 'receivedTariff1',
     receivedTariff2: 'receivedTariff2',
@@ -14,9 +14,9 @@ DSMR_OBIS_NAMES = {
     power: 'power'
 };
 
-DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}/;
+export const DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}/;
 
-class DsmrMessageParser {
+export class DsmrMessageParser {
 
     static parse(msg) {
         return msg.split('\n')
@@ -106,12 +106,10 @@ const receivedTariff1 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff1, DSMR
 
 const receivedTariff2 = new ReceivedTariff(DSMR_OBIS_CODES.receivedTariff2, DSMR_OBIS_NAMES.receivedTariff2);
 
-OBIS_PARSERS = [
+const OBIS_PARSERS = [
     power,
     timestamp,
     tariffIndicator,
     receivedTariff1,
     receivedTariff2
 ];
-
-module.exports = { DsmrMessageParser, DSMR_OBIS_NAMES, DSMR_MESSAGE_END_REGEX };

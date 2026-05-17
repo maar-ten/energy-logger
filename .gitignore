@@ -2,3 +2,4 @@ node_modules/
 nohup.out
 influx-data/
 .env
+dsmr-telegram-parser-1.0.0.tgz
