@@ -8,4 +8,4 @@ WORKDIR /app
 RUN apk add --no-cache tzdata &&\
     npm ci --omit=dev
 
-CMD ["node", "index.js"]
+CMD ["node", "--import=tsx index.ts"]

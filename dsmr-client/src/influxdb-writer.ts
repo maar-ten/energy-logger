@@ -3,8 +3,8 @@ import { PingAPI } from '@influxdata/influxdb-client-apis';
 
 import { DSMR_OBIS_NAMES } from './dsmr-message-parser.ts';
 
-const influxdbHost = process.env.INFLUXDB_HOST || 'http://localhost';
-const influxdbPort = process.env.INFLUXDB_PORT || 8086;
+const influxdbHost = process.env['INFLUXDB_HOST'] || 'http://localhost';
+const influxdbPort = process.env['INFLUXDB_PORT'] || 8086;
 const influxdbUrl = `${influxdbHost}:${influxdbPort}`;
 
 interface DSMRData {
