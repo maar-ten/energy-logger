@@ -36,7 +36,7 @@ export class DsmrClient {
         // this.port.on('open', () => testData$.subscribe(data => this.port.port.emitData(data)));
     }
 
-    listen() {
+    listen(): RegexParser {
         console.log('Listening for DSMR messages');
         return this.port.pipe(new RegexParser({ regex: DSMR_MESSAGE_END_REGEX }));
     }

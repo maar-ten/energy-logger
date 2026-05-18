@@ -2,8 +2,8 @@ import { fromEvent, interval } from 'rxjs';
 import { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } from 'rxjs/operators';
 
 import { InfluxdbWriter } from './influxdb-writer.ts';
-import { DsmrMessageParser } from './dsmr-message-parser.ts';
 import { DsmrClient } from './dsmr-client.ts';
+import {type DsmrTelegram, parseTelegram} from "dsmr-telegram-parser";
 
 const resolvedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 console.log(`Timezone is set to ${resolvedTimezone}`);
@@ -27,16 +27,16 @@ const influxReadyState$ = interval(2000).pipe(
 
 const messages$ = influxReadyState$.pipe(
     // Influx is ready, now switch to collecting data
-    switchMap(() => fromEvent(new DsmrClient().listen(), 'data')),
+    switchMap(() => fromEvent<string>(new DsmrClient().listen(), 'data', (data) => data)),
 
     // skip first message, because it may be incomplete
     skip(1),
 
     // parse data from the message
-    map((data: any) => DsmrMessageParser.parse(data)),
+    map((data: string) => parseTelegram(data)),
 
     // convert to influxdb point
-    map((data: any) => writer.toPoint(data)),
+    map(writer.toPoint),
 
     // buffer data for writing efficiency (60=~1min)
     bufferCount(1)
