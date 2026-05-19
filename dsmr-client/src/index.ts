@@ -3,7 +3,7 @@ import { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } from 'r
 
 import { InfluxdbWriter } from './influxdb-writer.ts';
 import { DsmrClient } from './dsmr-client.ts';
-import {type DsmrTelegram, parseTelegram} from "dsmr-telegram-parser";
+import { parseTelegram } from './dsmr-parser/parser.ts';
 
 const resolvedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 console.log(`Timezone is set to ${resolvedTimezone}`);

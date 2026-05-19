@@ -1,12 +1,19 @@
 import { InfluxDB, Point } from '@influxdata/influxdb-client';
 import { PingAPI } from '@influxdata/influxdb-client-apis';
 
-import { DSMR_OBIS_NAMES } from './dsmr-message-parser.ts';
-import type {DsmrTelegram} from "dsmr-telegram-parser";
+import type { DsmrTelegram } from './dsmr-parser/types.ts';
 
 const influxdbHost = process.env['INFLUXDB_HOST'] || 'http://localhost';
 const influxdbPort = process.env['INFLUXDB_PORT'] || 8086;
 const influxdbUrl = `${influxdbHost}:${influxdbPort}`;
+
+const DSMR_OBIS_NAMES = {
+    timestamp: 'timestamp',
+    receivedTariff1: 'receivedTariff1',
+    receivedTariff2: 'receivedTariff2',
+    tariffIndicator: 'tariffIndicator',
+    power: 'power'
+};
 
 export class InfluxdbWriter {
     influxWrite: ReturnType<InstanceType<typeof InfluxDB>['getWriteApi']>;

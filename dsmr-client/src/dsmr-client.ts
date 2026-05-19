@@ -1,9 +1,9 @@
 import { SerialPort } from 'serialport';
 import { RegexParser } from '@serialport/parser-regex';
 
-import { DSMR_MESSAGE_END_REGEX } from './dsmr-message-parser.ts';
-
 const PORT_ADDRESS = '/dev/ttyUSB0';
+const DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}/;
+
 
 /**
  * Uncomment below here to bind a mock device to the serial port
