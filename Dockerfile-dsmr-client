@@ -1,7 +1,4 @@
-# Node.js v22 has maintenance support until April 30 2027
-# Newer versions require 64-bit CPUs
-
-FROM node:22-alpine AS build-env
+FROM node:24-alpine AS build-env
 COPY /dsmr-client /app
 WORKDIR /app
 

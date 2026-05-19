@@ -1,10 +1,10 @@
 {
   "name": "dsmr-client",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "description": "DSMR client script for pushing DSMR data to an InfluxDB database",
   "main": "src/index.ts",
   "type": "module",
-  "engines": {"node": "22"},
+  "engines": {"node": "24"},
   "author": "Maar-ten",
   "license": "MIT",
   "scripts": {
