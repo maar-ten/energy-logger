@@ -38,7 +38,7 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "kwatt"
         },
         "overrides": []
       },
@@ -682,7 +682,6 @@
               "mode": "off"
             }
           },
-          "decimals": 1,
           "mappings": [],
           "thresholds": {
             "mode": "absolute",
@@ -696,7 +695,7 @@
               }
             ]
           },
-          "unit": "watt"
+          "unit": "kwatt"
         },
         "overrides": []
       },
@@ -773,35 +772,35 @@
     "list": [
       {
         "current": {
-          "text": "7620",
-          "value": "7620"
+          "text": "8513",
+          "value": "8513"
         },
         "description": "Het totaalverbruik (hoog en laag) in de vorige periode. Staat op de jaarafrekening van je energieleverancier.",
         "hide": 2,
         "name": "vorigVerbruikHoog",
-        "query": "7620",
+        "query": "8513",
         "skipUrlSync": true,
         "type": "constant"
       },
       {
         "current": {
-          "text": "6104",
-          "value": "6104"
+          "text": "6750",
+          "value": "6750"
         },
         "hide": 2,
         "name": "vorigVerbruikLaag",
-        "query": "6104",
+        "query": "6750",
         "skipUrlSync": true,
         "type": "constant"
       },
       {
         "current": {
-          "text": "1689",
-          "value": "1689"
+          "text": "1539",
+          "value": "1539"
         },
         "hide": 2,
         "name": "vorigVerbruikTotaal",
-        "query": "1689",
+        "query": "1539",
         "skipUrlSync": true,
         "type": "constant"
       }

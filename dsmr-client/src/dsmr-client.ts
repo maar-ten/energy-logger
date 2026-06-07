@@ -1,17 +1,15 @@
-const { SerialPort } = require('serialport');
-const { RegexParser } = require('@serialport/parser-regex');
-
-const { DSMR_MESSAGE_END_REGEX } = require('./dsmr-message-parser');
+import { RegexParser, SerialPort } from 'serialport';
+import { Observable, fromEvent } from 'rxjs';
 
 const PORT_ADDRESS = '/dev/ttyUSB0';
 
 /**
  * Uncomment below here to bind a mock device to the serial port
  */
-// const { SerialPortMock } = require('serialport');
-// const { readFileSync } = require('fs');
-// const { interval } = require('rxjs');
-// const { map, take } = require('rxjs/operators');
+// import { SerialPortMock } from 'serialport';
+// import { readFileSync } from 'fs';
+// import { interval } from 'rxjs';
+// import { map, take } from 'rxjs/operators';
 // const testData = readFileSync('example-dsmr-messages.txt', 'utf8').split('[BREAK]');
 // const testData$ = interval(1000).pipe(
 //   take(testData.length),
@@ -19,25 +17,28 @@ const PORT_ADDRESS = '/dev/ttyUSB0';
 // );
 // SerialPortMock.binding.createPort(PORT_ADDRESS);
 
-class DsmrClient {
+export class DsmrClient {
+    port: SerialPort;
+
     constructor() {
         console.log(`Setup connection to serial port ${PORT_ADDRESS}`);
         // uncomment the mock and comment the regular port
         // this.port = new SerialPortMock({
-          this.port = new SerialPort({
+        this.port = new SerialPort({
             path: PORT_ADDRESS,
             baudRate: 115200,
             parity: 'none'
-          });
+        });
 
         // Uncomment below for sending mock data
-        // this.port.on('open', () => testData$.subscribe(data => this.port.port.emitData(data)));
+        // this.port.on('open', () => testData$.subscribe(data => this.port.port?.emitData(data!)));
     }
 
-    listen() {
+    listen(): Observable<string> {
         console.log('Listening for DSMR messages');
-        return this.port.pipe(new RegexParser({ regex: DSMR_MESSAGE_END_REGEX }));
+        const parser = this.port.pipe(new RegexParser({ regex: '\/' }));
+         
+        return fromEvent<string>(parser, 'data', (data: string) => '/' + data); // add '/' because the parser removes it
     }
 }
 
-module.exports = { DsmrClient };

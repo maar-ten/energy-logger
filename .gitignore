@@ -1,4 +1,5 @@
 node_modules/
-nohup.out
 influx-data/
+.idea/
+nohup.out
 .env
