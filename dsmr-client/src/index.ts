@@ -1,9 +1,12 @@
-import { fromEvent, interval } from 'rxjs';
+import { interval } from 'rxjs';
 import { bufferCount, map, mergeMap, retry, skip, switchMap, take, tap } from 'rxjs/operators';
 
 import { InfluxdbWriter } from './influxdb-writer.ts';
 import { DsmrClient } from './dsmr-client.ts';
 import { parseTelegram } from './dsmr-parser/parser.ts';
+
+const READY_CHECK_INTERVAL = 2000;
+const READY_CHECK_RETRIES = 30;
 
 const resolvedTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 console.log(`Timezone is set to ${resolvedTimezone}`);
@@ -11,7 +14,7 @@ console.log(`Timezone is set to ${resolvedTimezone}`);
 const writer = new InfluxdbWriter();
 
 // Emits a value once when InfluxDB is ready to receive data
-const influxReadyState$ = interval(2000).pipe(
+const influxReadyState$ = interval(READY_CHECK_INTERVAL).pipe(
     // check if InfluxDB is ready
     mergeMap(() => writer.isReady()),
 
@@ -22,12 +25,12 @@ const influxReadyState$ = interval(2000).pipe(
     tap(() => console.log('InfluxDB is ready')),
 
     // retry the ready check (an error is thrown when InfluxDB is not ready)
-    retry({ count: 10 }),
+    retry({ count: READY_CHECK_RETRIES }),
 );
 
 const messages$ = influxReadyState$.pipe(
     // Influx is ready, now switch to collecting data
-    switchMap(() => fromEvent<string>(new DsmrClient().listen(), 'data', (data) => data)),
+    switchMap(() => new DsmrClient().listen()),
 
     // skip first message, because it may be incomplete
     skip(1),

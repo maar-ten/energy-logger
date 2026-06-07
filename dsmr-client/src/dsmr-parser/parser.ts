@@ -29,7 +29,7 @@ export function parseTelegram(telegram: string, options: ParseOptions = {}): Dsm
   }
 
   const crc = telegram.substring(bangIndex + 1).trim().substring(0, 4);
-  const crcValid = doValidateCrc ? validateCrc(telegram) : true;
+  const crcValid = doValidateCrc ? validateCrc(telegram) : true; // the CRC is always invalid, which is probably due to the line endings
 
   // Build a map of obis -> line content
   const obisMap = new Map<string, string>();

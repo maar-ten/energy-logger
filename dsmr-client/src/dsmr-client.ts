@@ -1,9 +1,7 @@
-import { SerialPort } from 'serialport';
-import { RegexParser } from '@serialport/parser-regex';
+import { RegexParser, SerialPort } from 'serialport';
+import { Observable, fromEvent } from 'rxjs';
 
 const PORT_ADDRESS = '/dev/ttyUSB0';
-const DSMR_MESSAGE_END_REGEX = /![0-9a-fA-F]{4}/;
-
 
 /**
  * Uncomment below here to bind a mock device to the serial port
@@ -33,12 +31,14 @@ export class DsmrClient {
         });
 
         // Uncomment below for sending mock data
-        // this.port.on('open', () => testData$.subscribe(data => this.port.port.emitData(data)));
+        // this.port.on('open', () => testData$.subscribe(data => this.port.port?.emitData(data!)));
     }
 
-    listen(): RegexParser {
+    listen(): Observable<string> {
         console.log('Listening for DSMR messages');
-        return this.port.pipe(new RegexParser({ regex: DSMR_MESSAGE_END_REGEX }));
+        const parser = this.port.pipe(new RegexParser({ regex: '\/' }));
+         
+        return fromEvent<string>(parser, 'data', (data: string) => '/' + data); // add '/' because the parser removes it
     }
 }
 
