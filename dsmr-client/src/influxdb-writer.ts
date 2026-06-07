@@ -38,7 +38,7 @@ export class InfluxdbWriter {
             .floatField(DSMR_OBIS_NAMES.receivedTariff1, data.electricityDeliveredTariff1)
             .floatField(DSMR_OBIS_NAMES.receivedTariff2, data.electricityDeliveredTariff2)
             .stringField(DSMR_OBIS_NAMES.tariffIndicator, data.activeTariff)
-            .intField(DSMR_OBIS_NAMES.power, data.currentPowerUsage);
+            .floatField(DSMR_OBIS_NAMES.power, data.currentPowerUsage);
     }
 
     isReady() {
